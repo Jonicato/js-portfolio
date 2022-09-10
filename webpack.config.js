@@ -7,6 +7,18 @@ module.exports = {
         filename: 'main.js',
     },
     resolve: {
-        extensions: ['.js'] // Extensiones que debe identificar webpack para ller los archivos de nuestro proyecto
-    } // Hacia dónde vamos a enviar lo qu va a preparar webpack
+        extensions: ['.js'] // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
+    }, // Hacia dónde vamos a enviar lo qu va a preparar webpack
+    module: {
+        // REGLAS PARA TRABAJAR CON WEBPACK
+        rules: [
+            {
+                test: /\.m?js$/, // Qué tipo de extensiones voy a trabajar
+                exclude: /node_nodules/, // Ignora los módulos de la carpeta
+                use: {
+                    loader: 'babel-loader'
+                }
+            }
+        ]
+    }
 }
