@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js', // Cuál es el punto de entrada de mi aplicación
@@ -20,5 +21,12 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            inject: 'body',
+            template: './public/index.html',
+            filename: './index.html'
+        })
+    ]
 }
