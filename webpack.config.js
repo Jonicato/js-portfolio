@@ -13,8 +13,14 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
     },
     resolve: {
-        extensions: ['.js'] // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
-    }, // Hacia dónde vamos a enviar lo qu va a preparar webpack
+        extensions: ['.js'], // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
+        alias: {
+            '@utils': path.resolve(__dirname, 'src/utils/'),
+            '@templates': path.resolve(__dirname, 'src/templates/'),
+            '@styles': path.resolve(__dirname, 'src/styles/'),
+            '@images': path.resolve(__dirname, 'src/assets/images/'),
+        }
+    }, // Hacia dónde vamos a enviar lo que va a preparar webpack
     module: {
         // REGLAS PARA TRABAJAR CON WEBPACK
         rules: [
@@ -44,8 +50,8 @@ module.exports = {
                         limit: 10000,
                         mimetype: 'application/font-woff',
                         name: '[name].[contenthash].[ext]',
-                        outputPath: './assets/fonts',
-                        publicPath: './assets/fonts',
+                        outputPath: '../assets/fonts',
+                        publicPath: '../assets/fonts',
                         esModule: false,
                     }
                 }
