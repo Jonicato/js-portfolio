@@ -12,6 +12,7 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
     },
     mode: 'development',
+    watch: true,
     resolve: {
         extensions: ['.js'], // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
         alias: {

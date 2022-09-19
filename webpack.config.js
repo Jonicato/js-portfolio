@@ -2,8 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -12,8 +10,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'), // Obtiene la ruta donde se encuentra mi carpeta del proyecto
         filename: '[name].[contenthash].js',
-        assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
+        assetModuleFilename: 'assets/images/[hash][ext][query]',
+        clean: true // Agrega una serie de caracteres aleatorios
     },
+    mode: 'production',
     resolve: {
         extensions: ['.js'], // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
         alias: {
