@@ -1,5 +1,5 @@
 @font-face {
-	font-family: 'Ubuntu';
+	font-family: 'Ubuntu, sans-serif';
 	src: url('../assets/fonts/ubuntu-regular.woff2') format('woff2'),
 		url('../assets/fonts/ubuntu-regular.woff') format('woff');
 	font-weight: 400;
@@ -13,7 +13,9 @@ html {
 }
 
 body {
-	margin: 0
+	margin: 0;
+	background-color: #f9f9f9;
+	font-family: Ubuntu, sans-serif;
 }
 
 article,

@@ -2,12 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js', // Cuál es el punto de entrada de mi aplicación
     output: {
         path: path.resolve(__dirname, 'dist'), // Obtiene la ruta donde se encuentra mi carpeta del proyecto
-        filename: 'main.js',
+        filename: '[name].[contenthash].js',
         assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
     },
     resolve: {
@@ -39,14 +41,12 @@ module.exports = {
                 use: {
                     loader: 'url-loader',
                     options: {
-                        limit: false, // o le pasamos un booleano true o false
-                        mimetype: 'aplication/font-woff', /* Es pecifica el tipo de MIME con el que se alineará el archivo.
-                        Los MIME Types (Multipurpose Internet Mail Extensions) son la manera standard de mandar contenido a través de la red. */
-                        name: '[name].[ext]', /* EL NOMBRE INICIAL DEL ARCHIVO + SU EXTENSIÓN
-                        Puedes agregarle [name]hola.[ext] y el output del archivo seria ubuntu-regularhola.woff */
-                        outputPath: './assets/fonts', // El directorio de salida
-                        publicPath: './assets/fonts',// El directorio público
-                        esModule: false // Avisar explícitamente si es un módulo
+                        limit: 10000,
+                        mimetype: 'application/font-woff',
+                        name: '[name].[contenthash].[ext]',
+                        outputPath: './assets/fonts',
+                        publicPath: './assets/fonts',
+                        esModule: false,
                     }
                 }
             }
@@ -58,7 +58,9 @@ module.exports = {
             template: './public/index.html',
             filename: './index.html'
         }),
-        new MiniCssExtractPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'assets/[name].[contenthash].css'
+        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -67,5 +69,8 @@ module.exports = {
                 }
             ]
         })
-    ]
+    ],
+    optimization: {
+        minimize: true
+    }
 }
