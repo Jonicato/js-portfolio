@@ -8,6 +8,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'), // Obtiene la ruta donde se encuentra mi carpeta del proyecto
         filename: 'main.js',
+        assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
     },
     resolve: {
         extensions: ['.js'] // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
@@ -32,6 +33,22 @@ module.exports = {
             {
                 test: /\.png/,
                 type: 'asset/resource'
+            },
+            {
+                test: /\.(woff|woff2)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: false, // o le pasamos un booleano true o false
+                        mimetype: 'aplication/font-woff', /* Es pecifica el tipo de MIME con el que se alineará el archivo.
+                        Los MIME Types (Multipurpose Internet Mail Extensions) son la manera standard de mandar contenido a través de la red. */
+                        name: '[name].[ext]', /* EL NOMBRE INICIAL DEL ARCHIVO + SU EXTENSIÓN
+                        Puedes agregarle [name]hola.[ext] y el output del archivo seria ubuntu-regularhola.woff */
+                        outputPath: './assets/fonts', // El directorio de salida
+                        publicPath: './assets/fonts',// El directorio público
+                        esModule: false // Avisar explícitamente si es un módulo
+                    }
+                }
             }
         ]
     },
