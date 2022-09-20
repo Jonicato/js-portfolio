@@ -12,7 +12,6 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]' // Agrega una serie de caracteres aleatorios
     },
     mode: 'development',
-    watch: true,
     resolve: {
         extensions: ['.js'], // Extensiones que debe identificar webpack para leer los archivos de nuestro proyecto
         alias: {
@@ -77,5 +76,16 @@ module.exports = {
             ]
         }),
         new Dotenv(),
-    ]
+    ],
+    devServer: {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+            watch: true,
+        },
+        watchFiles: path.join(__dirname, './**'), // Esto observa los cambios en todos nuestros archivos y actualiza el navegador
+        compress: true,
+        historyApiFallback: true, // Esto nos permite tener un historial de lo que sucede en el navegador
+        port: 3006,
+        open: true, // Hace que se abra en el navegador
+    },
 }
